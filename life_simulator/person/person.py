@@ -5,8 +5,6 @@ from attribute import Attributes
 
 class Person(object):
     default_value = 500  # 1000 is max
-    number_of_activities = 2
-    number_of_activities_weekends = 4
     stats = {
         Attributes.happiness: default_value,
         Attributes.excitement: default_value,
@@ -26,9 +24,9 @@ class Person(object):
         self.money = self.default_value
 
     def apply_activity(self, activity_cls):
-        for attribute in activity_cls.influenced_attributes:
-            self.stats[attribute] += activity_cls.influenced_attributes[attribute]
-        # self.time.current_hour += activity_cls.duration
+        for act, value in activity_cls.influenced_attributes.iteritems():
+            self.stats[act] += value
+        # self.time.current_hour += activity_cls.duration  # TODO: manage time
 
 
 class Time(object):

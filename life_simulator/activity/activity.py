@@ -1,4 +1,4 @@
-from attribute import Attributes
+from person.attribute import Attributes
 
 
 class Activity(object):
@@ -9,15 +9,18 @@ class Activity(object):
     duration = 4
     cost = 0
 
+    def __init__(self):
+        pass
 
-class Study(Activity):
-    influenced_attributes = {
-        Attributes.intelligence: Activity.small_influence,
-        Attributes.confidence: Activity.small_influence,
-
-        Attributes.energy: -Activity.small_influence,
-        Attributes.fitness: -Activity.small_influence,
-    }
+    @staticmethod
+    def activities():
+        return {
+            "read": Read,
+            "run": Run,
+            "sleep": Sleep,
+            "takeAWalk": TakaAWalk,
+            "goToGym": GoToGym
+        }
 
 
 class Read(Activity):
@@ -61,15 +64,4 @@ class GoToGym(Activity):
         Attributes.fitness: Activity.small_influence,
 
         Attributes.neatness: -Activity.tiny_influence
-    }
-
-
-class Activities(object):
-    all = {
-        "study": Study,
-        "read": Read,
-        "run": Run,
-        "sleep": Sleep,
-        "takeawalk": TakaAWalk,
-        "gotogym": GoToGym
     }
