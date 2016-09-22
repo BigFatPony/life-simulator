@@ -1,20 +1,21 @@
-
-from activity.activity import Activity
 from person.person import Person
+from activity.activity import Attributes, activities
 
 
 def main():
-    player = Person()
+    player = Person(Attributes)
     while not player.time.is_last_day():
-        player.time.next_day()
-        inp = raw_input()
+        inp = input()
         try:
-            player.apply_activity(Activity.activities()[inp])
+            print("it will take:", activities()[inp].duration, " ok?")
+            ok = input()
+            if ok != "n":
+                player.apply_activity(activities()[inp])
         except KeyError:
-            print "you morron pick one of these ", Activity.activities()[inp]
+            print("you morron pick one of these ", activities()[inp])
 
-        print player.stats
-        print player.time.current_date
+        print(player.stats)
+        print(player.time.current_date)
 
 
 if __name__ == "__main__":

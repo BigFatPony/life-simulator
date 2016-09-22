@@ -1,50 +1,46 @@
 import datetime
 
-from attribute import Attributes
-
 
 class Person(object):
-    default_value = 500  # 1000 is max
-    stats = {
-        Attributes.happiness: default_value,
-        Attributes.excitement: default_value,
-        Attributes.socialization: default_value,
-        Attributes.confidence: default_value,
-        Attributes.intelligence: default_value,
-        Attributes.culture: default_value,
-        Attributes.fitness: default_value,
-        Attributes.soberity: default_value,
-        Attributes.energy: default_value,
-        Attributes.neatness: default_value,
-        Attributes.charisma: default_value,
-    }
 
-    def __init__(self):
+    def __init__(self, attributes):
+        default_value = 500  # TODO: 1000 is max
         self.time = Time()
-        self.money = self.default_value
+        self.money = default_value  # TODO: money
+        self.attributes = attributes
+        self.stats = {
+            attributes.happiness: default_value,
+            attributes.excitement: default_value,
+            attributes.socialization: default_value,
+            attributes.confidence: default_value,
+            attributes.intelligence: default_value,
+            attributes.culture: default_value,
+            attributes.fitness: default_value,
+            attributes.soberity: default_value,
+            attributes.energy: default_value,
+            attributes.neatness: default_value,
+            attributes.charisma: default_value,
+        }
 
     def apply_activity(self, activity_cls):
-        for act, value in activity_cls.influenced_attributes.iteritems():
+        for act, value in activity_cls.influenced_attributes.items():
             self.stats[act] += value
-        # self.time.current_hour += activity_cls.duration  # TODO: manage time
+        self.time.add_hours(activity_cls.duration)
 
 
 class Time(object):
 
     def __init__(self):
-        self.start_date = datetime.date(2010, 1, 1)
-        self.current_date = datetime.date(2010, 1, 1)
-        self.end_date = datetime.date(2010, 2, 1)
-        self.current_hour = datetime.time(12, 0, 0)
+        self.start_date = datetime.datetime(2010, 1, 1, 0, 0, 0)
+        self.current_date = datetime.datetime(2010, 1, 1, 0, 0, 0)
+        self.end_date = datetime.datetime(2010, 2, 1, 0, 0, 0)
 
-    def next_day(self):
+    def next_day(self): # TODO: remove
         self.current_date += datetime.timedelta(days=1)
 
     def add_hours(self, hours):
-        temp_hour = self.current_hour
-        self.current_hour = datetime.timedelta(hours=hours)
-        if self.current_hour < temp_hour:  # it means it's a new day
-            self.next_day()
+        delta = datetime.timedelta(hours=hours)
+        self.current_date = self.current_date + delta
 
     def is_last_day(self):
         return self.current_date == self.end_date

@@ -1,4 +1,15 @@
-from person.attribute import Attributes
+class Attributes(object):
+    happiness = "happiness"
+    excitement = "excitement"
+    socialization = "socialization"
+    confidence = "confidence"
+    intelligence = "intelligence"
+    culture = "culture"
+    fitness = "fitness"
+    soberity = "soberity"
+    energy = "energy"
+    neatness = "neatness"
+    charisma = "charisma"
 
 
 class Activity(object):
@@ -9,21 +20,9 @@ class Activity(object):
     duration = 4
     cost = 0
 
-    def __init__(self):
-        pass
-
-    @staticmethod
-    def activities():
-        return {
-            "read": Read,
-            "run": Run,
-            "sleep": Sleep,
-            "takeAWalk": TakaAWalk,
-            "goToGym": GoToGym
-        }
-
 
 class Read(Activity):
+
     influenced_attributes = {
         Attributes.intelligence: Activity.small_influence,
         Attributes.culture: Activity.small_influence,
@@ -49,7 +48,8 @@ class Sleep(Activity):
         Attributes.energy: Activity.big_influence
     }
 
-class TakaAWalk(Activity):
+
+class TakeAWalk(Activity):
     influenced_attributes = {
         Attributes.fitness: Activity.tiny_influence,
         Attributes.energy: Activity.small_influence,
@@ -64,4 +64,45 @@ class GoToGym(Activity):
         Attributes.fitness: Activity.small_influence,
 
         Attributes.neatness: -Activity.tiny_influence
+    }
+
+
+class Study(Activity):  # TODO
+    influenced_attributes = {
+        Attributes.intelligence: Activity.small_influence,
+        Attributes.confidence: Activity.small_influence,
+
+        Attributes.energy: -Activity.small_influence,
+        Attributes.fitness: -Activity.small_influence,
+    }
+
+
+class Job(Activity): # TODO
+
+    def __init__(self):
+        self.duration = 8
+        self.drive = 1
+
+    pass  # TODO
+
+
+class Meet(Activity):  # TODO
+    pass
+
+
+class Shopping(Activity): # TODO
+    pass
+
+
+def activities():
+    return {
+        "read": Read,
+        "run": Run,
+        "sleep": Sleep,
+        "takeAWalk": TakeAWalk,
+        "goToGym": GoToGym,
+        "study": Study,
+        "meet": Meet,
+        "job": Job,
+        "shopping": Shopping
     }
