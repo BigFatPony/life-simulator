@@ -77,7 +77,7 @@ class Study(Activity):  # TODO
     }
 
 
-class Job(Activity): # TODO
+class Job(Activity):  # TODO
 
     def __init__(self):
         self.duration = 8
@@ -90,7 +90,7 @@ class Meet(Activity):  # TODO
     pass
 
 
-class Shopping(Activity): # TODO
+class Shopping(Activity):  # TODO
     pass
 
 

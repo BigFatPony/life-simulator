@@ -35,9 +35,6 @@ class Time(object):
         self.current_date = datetime.datetime(2010, 1, 1, 0, 0, 0)
         self.end_date = datetime.datetime(2010, 2, 1, 0, 0, 0)
 
-    def next_day(self): # TODO: remove
-        self.current_date += datetime.timedelta(days=1)
-
     def add_hours(self, hours):
         delta = datetime.timedelta(hours=hours)
         self.current_date = self.current_date + delta
